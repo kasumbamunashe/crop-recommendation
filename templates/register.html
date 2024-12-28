@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url("static/pexels-minan.jpg");
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 114%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        header {
+            background-color: #036320;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px 40px;
+            margin: 50px auto;
+            max-width: 850px;
+            color: white;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            color: #45a049;
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #45a049;
+            box-shadow: 0 0 5px rgba(69, 160, 73, 0.5);
+        }
+
+        button[type="submit"] {
+            background-color: #036320;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #39903f;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 10px 0;
+            background-color: #036320;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-check-label {
+            font-size: 16px;
+            color: blue;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>Crop Recommendation and Management </header>
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div>
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+    <p class="text-center mb-4">Welcome to our crop management system registration page.
+        Join us to take your farming to the next level with smart recommendations!</p>
+    <form action="/register" method="post" novalidate>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" name="fullname"
+                           placeholder="Enter your full name" required aria-label="Full Name">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email"
+                           placeholder="Enter your email address" required aria-label="Email">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" class="form-control" id="phone" name="phone"
+                           placeholder="Enter your phone number" pattern="[0-9]{10}"
+                           title="Please enter a 10-digit phone number" required aria-label="Phone Number">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="location">Farm Location</label>
+                    <input type="text" class="form-control" id="location" name="location"
+                           placeholder="Enter your farm location" required aria-label="Farm Location">
+                </div>
+            </div>
+            <div class="col-md-6">
+    <div class="form-group">
+        <label for="language">Language Preference</label>
+        <select id="language" name="language_preference" class="form-select" required aria-label="Language Preference">
+            <option value="" disabled selected>Select your preferred language</option>
+            <option value="English">English</option>
+            <option value="Shona">Shona</option>
+        </select>
+    </div>
+
+</div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="landArea">Total Land Area</label>
+                    <input type="text" class="form-control" id="landArea" name="land_area"
+                           placeholder="Enter total land area in acres" required aria-label="Total Land Area">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="soilType">Soil Type</label>
+                    <select id="soilType" name="soil_type" class="form-select"
+                            required aria-label="Soil Type">
+                        <option value="" disabled selected>Select soil type</option>
+                        <option value="sandy">Sandy</option>
+                        <option value="clay">Clay</option>
+                        <option value="loamy">Loamy</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="terms" required aria-label="Terms and Conditions">
+                    <label class="form-check-label" for="terms">
+                        I agree to the terms and conditions
+                    </label>
+                </div>
+            </div>
+            <div class="col-12 text-center">
+                <button class="btn btn-primary" type="submit">Register</button>
+            </div>
+        </div>
+    </form>
+</div>
+<footer>
+    © 2025 Crop Recommendation - Empowering Farmers
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+<script>
+    // Display the pop-up message and redirect the user
+    window.onload = function() {
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                if ("{{ category }}" === 'success') {
+                    alert("{{ message }}");
+                    window.location.href = "{{ url_for('login') }}"; // Redirect to the login page
+                }
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    }
+</script>
+
+</body>
+</html>
