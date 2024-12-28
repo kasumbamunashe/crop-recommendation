@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+          crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation and Management System</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url("static/vegetables.jpg");
+            background-size: fit;
+            background-attachment: fixed;
+            color: white;
+            margin: 0;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 114%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+
+        .header {
+            background-color: #036320;
+            padding: 15px 0;
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            border-radius: 8px;
+            padding: 25px 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 12px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ccc;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 5px #3dbd6b;
+            border-color: #3dbd6b;
+        }
+
+        .btn-primary {
+            background-color: #036320;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #2da65e;
+            transform: scale(1.03);
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .register-link a {
+            color: #3dbd6b;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        .alert {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        Crop Recommendation and Management
+    </div>
+    <div class="container">
+        <form id="login-form" action="/login" method="POST">
+            <h2>Login</h2>
+            {% if error %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+            <div class="mb-3">
+    <label for="username" class="form-label">Username (Email):</label>
+    <input type="email" class="form-control" id="username" name="username" placeholder="Enter your email" required>
+</div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" id="remember-me">
+                <label class="form-check-label" for="remember-me">Remember me</label>
+            </div>
+            <input type="submit" value="Log in" class="btn btn-primary">
+            <div class="register-link">
+                <p>Don't have an account? <a href="/register">Register here</a></p>
+                <a href="/forgot_password">Forgot Password?</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function () {
+            const submitButton = document.querySelector('input[type="submit"]');
+            submitButton.value = "Logging in...";
+            submitButton.disabled = true;
+        });
+    </script>
+</body>
+</html>
